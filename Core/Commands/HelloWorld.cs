@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Text;
+using System.IO;
+using System.Linq;
+
+using Discord;
+using Discord.Commands;
+
+namespace KyannaApp.Core.Commands
+{
+    public class HelloWorld : ModuleBase<SocketCommandContext>
+    {
+        [Command("Hello"), Alias("Helloworld", "world", "hello", "Hey Kyanna", "Hey"), Summary("Hello world command")]
+        public async Task kyannaApp()
+        {
+            string Greeting = File.ReadLines("GreetingList.txt").Skip(3).Take(1).First();
+            await Context.Channel.SendMessageAsync(Greeting);
+        }
+    }
+}
