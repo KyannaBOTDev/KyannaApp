@@ -63,7 +63,7 @@ namespace KyannaApp
             if (Context.User.IsBot) return;
 
             int ArgPos = 0;
-            if (!(Message.HasStringPrefix("a!", ref ArgPos) || Message.HasMentionPrefix(Client.CurrentUser, ref ArgPos))) return;
+            if (!(Message.HasStringPrefix("Hey", ref ArgPos) || Message.HasMentionPrefix(Client.CurrentUser, ref ArgPos))) return;
 
             var Result = await Commands.ExecuteAsync(Context, ArgPos);
             if (!Result.IsSuccess)
