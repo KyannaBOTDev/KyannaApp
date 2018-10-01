@@ -2,7 +2,6 @@
 using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
-
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
@@ -15,14 +14,13 @@ namespace KyannaApp
         private CommandService Commands;
 
         static void Main(string[] args)
-        => new Program().MainAsync().GetAwaiter().GetResult();
+            => new Program().MainAsync().GetAwaiter().GetResult();
 
         private async Task MainAsync()
         {
             Client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                LogLevel = LogSeverity.Debug,
-
+                LogLevel = LogSeverity.Debug
             });
 
             Commands = new CommandService(new CommandServiceConfig
@@ -56,19 +54,19 @@ namespace KyannaApp
 
         private async Task Client_MessageReceived(SocketMessage MessageParam)
         {
-            var Message = MessageParam as SocketUserMessage;
-            var Context = new SocketCommandContext(Client, Message);
+            var message = MessageParam as SocketUserMessage;
+            var context = new SocketCommandContext(Client, message);
 
-            if (Context.Message == null || Context.Message.Content == "") return;
-            if (Context.User.IsBot) return;
+            if (context.Message == null || context.Message.Content == "") return;
+            if (context.User.IsBot) return;
 
-            int ArgPos = 0;
-            if (!(Message.HasStringPrefix("Hey", ref ArgPos) || Message.HasMentionPrefix(Client.CurrentUser, ref ArgPos))) return;
+            int argPos = 0;
+            if (!(message.HasStringPrefix("Hey", ref argPos) || message.HasMentionPrefix(Client.CurrentUser, ref argPos))) return;
 
-            var Result = await Commands.ExecuteAsync(Context, ArgPos);
-            if (!Result.IsSuccess)
+            var result = await Commands.ExecuteAsync(context, argPos);
+            if (!result.IsSuccess)
             {
-                Console.WriteLine($"{DateTime.Now} at Commands] Something went wrong with executing a command. Text: {Context.Message.Content} | Error: {Result.ErrorReason}");
+                Console.WriteLine($"{DateTime.Now} at Commands] Something went wrong with executing a command. Text: {context.Message.Content} | Error: {result.ErrorReason}");
             }
         }
     }
