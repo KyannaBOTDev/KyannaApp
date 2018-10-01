@@ -10,12 +10,12 @@ using Discord.Commands;
 
 namespace KyannaApp.Core.Commands
 {
-    public class HelloWorld : ModuleBase<SocketCommandContext>
+    public class KyannaLove : ModuleBase<SocketCommandContext>
     {
-        [Command("Hello"), Alias("Helloworld", "world", "hello", "Hey Kyanna", "Hey", "Kyanna"), Summary("Hello world command")]
+        [Command("Love"), Alias("I love you", "love you", "Do you love me?"), Summary("LoveKyanna command")]
         public async Task kyannaApp()
         {
-            string Greeting = File.ReadAllLines("GreetingList.txt").Skip(3).Take(1).First();
+            string Greeting = File.ReadAllLines("LoveListA.txt").Skip(1).Take(1).First();
             await Context.Channel.SendMessageAsync(Greeting);
         }
     }
