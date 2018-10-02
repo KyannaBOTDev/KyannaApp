@@ -11,7 +11,7 @@ namespace KyannaApp.Core.Commands
     public class HelloWorld : ModuleBase<SocketCommandContext>
     {
         [Command("Hello"), Alias("Helloworld", "world", "hello", "Hey Kyanna", "Hey", "Kyanna", " Helloworld", " world", " hello", " Hey Kyanna", " Hey", " Kyanna"), Summary("Hello world command")]
-        public async Task Greet()
+        public async Task kyannaApp()
         {
             string greeting = File.ReadAllLines("GreetingList.txt").Skip(3).Take(1).First();
             await Context.Channel.SendMessageAsync(greeting);
