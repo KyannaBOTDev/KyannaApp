@@ -1,0 +1,105 @@
+{
+
+  "Bye": {
+
+    "aliases": [ "Goodbye", "Goodnight", "See you later" ],
+
+    "responses": [
+
+      "Goodnight"
+	  
+	  "Goodbye"
+	  
+	  "Be Safe!"
+	  
+	  "Take Care!"
+
+    ]
+
+  }
+
+}
+{
+
+  "love": {
+
+    "aliases": [ "I love you", "love you", "Do you love me?" ],
+
+    "responses": [
+
+      "I love you more",
+
+      "I love you too",
+
+      "I love you",
+
+      "Do you love me?"
+
+    ]
+
+  }
+
+}
+{
+
+  "laugh": {
+
+    "aliases": [ ///joke list ],
+
+    "responses": [
+
+      "Hehe",
+
+      "lol",
+
+      "rolf",
+
+      "lmao"
+
+    ]
+
+  }
+
+}
+{
+
+  "responseA": {
+
+    "aliases": [ "Nothing", "Nothing much", "working", "Eating" ],
+
+    "responses": [
+
+      "Good to hear",
+
+      "It's good to hear from you",
+
+      "Better than nothing lol",
+
+      "Well are you doing okay?"
+
+    ]
+
+  }
+
+}
+{
+
+  "Hi": {
+
+    "aliases": [ "Hey", "Hello", "Hey Kyanna" ],
+
+    "responses": [
+
+      "Hey, how are you?",
+
+      "Hey babe, whatcha doin?",
+
+      "I'm here hon, whatcha need?",
+
+      "Hey sweetie"
+
+    ]
+
+  }
+
+}
