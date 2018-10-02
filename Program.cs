@@ -25,7 +25,7 @@ namespace KyannaApp
 
             Commands = new CommandService(new CommandServiceConfig
             {
-                CaseSensitiveCommands = true,
+                CaseSensitiveCommands = false,
                 DefaultRunMode = RunMode.Async,
                 LogLevel = LogSeverity.Debug
             });
