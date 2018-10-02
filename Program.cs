@@ -12,6 +12,8 @@ namespace KyannaApp
     {
         private DiscordSocketClient Client;
         private CommandService Commands;
+        private static readonly string DataDirectory = string.Format("..{0}..{0}..{0}Core{0}Data", Path.DirectorySeparatorChar);
+        private static readonly string ResponseFile = Path.Combine(DataDirectory, "response.json");
 
         static void Main(string[] args)
             => new Program().MainAsync().GetAwaiter().GetResult();
