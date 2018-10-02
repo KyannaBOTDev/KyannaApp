@@ -20,7 +20,7 @@ namespace KyannaApp
         {
             Client = new DiscordSocketClient(new DiscordSocketConfig
             {
-                LogLevel = LogSeverity.Debug
+                LogLevel = LogSeverity.Info
             });
 
             Commands = new CommandService(new CommandServiceConfig
