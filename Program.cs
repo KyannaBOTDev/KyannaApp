@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
+using KyannaApp.Core;
 using KyannaApp.Core.Features;
 
 namespace KyannaApp
@@ -69,7 +69,7 @@ namespace KyannaApp
             if (context.Message == null || context.Message.Content == "") return;
             if (context.User.IsBot) return;
 
-            if (message.MentionedUsers.Contains(Client.CurrentUser))
+            if (message.HasMention(Client.CurrentUser))
             {
                 await Chatterbot.Mentioned(context);
             }
