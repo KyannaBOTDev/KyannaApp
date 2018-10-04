@@ -66,6 +66,7 @@ namespace KyannaApp.Core.Features
                     string category = chatTriggers[text];
                     string response = chatResponses[category][r.Next(chatResponses[category].Length)];
                     await context.Channel.SendMessageAsync(response);
+                    break;
                 }
             }
         }
