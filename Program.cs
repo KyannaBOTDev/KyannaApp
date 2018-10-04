@@ -1,10 +1,12 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Discord;
 using Discord.WebSocket;
 using Discord.Commands;
+using KyannaApp.Core.Features;
 
 namespace KyannaApp
 {
@@ -12,8 +14,10 @@ namespace KyannaApp
     {
         private DiscordSocketClient Client;
         private CommandService Commands;
-        private static readonly string DataDirectory = string.Format("..{0}..{0}..{0}Core{0}Data", Path.DirectorySeparatorChar);
-        private static readonly string ResponseFile = Path.Combine(DataDirectory, "response.json");
+        private Chatterbot Chatterbot;
+        private static readonly string dataDirectory = string.Format("..{0}..{0}..{0}Core{0}Data", Path.DirectorySeparatorChar);
+        private static readonly string dialogFile = Path.Combine(dataDirectory, "dialog.json");
+        private UserStatus defaultStatus = UserStatus.Online;
 
         static void Main(string[] args)
             => new Program().MainAsync().GetAwaiter().GetResult();
@@ -31,6 +35,8 @@ namespace KyannaApp
                 DefaultRunMode = RunMode.Async,
                 LogLevel = LogSeverity.Debug
             });
+
+            Chatterbot = new Chatterbot(dialogFile);
 
             Client.MessageReceived += Client_MessageReceived;
             await Commands.AddModulesAsync(Assembly.GetEntryAssembly());
@@ -51,6 +57,7 @@ namespace KyannaApp
 
         private async Task Client_Ready()
         {
+            await Client.SetStatusAsync(defaultStatus);
             await Client.SetGameAsync("IN DEVELOPMENT");
         }
 
@@ -62,13 +69,9 @@ namespace KyannaApp
             if (context.Message == null || context.Message.Content == "") return;
             if (context.User.IsBot) return;
 
-            int argPos = 0;
-            if (!message.HasStringPrefix("Hey", ref argPos) && !message.HasMentionPrefix(Client.CurrentUser, ref argPos)) return;
-
-            var result = await Commands.ExecuteAsync(context, argPos);
-            if (!result.IsSuccess)
+            if (message.MentionedUsers.Contains(Client.CurrentUser))
             {
-                Console.WriteLine($"{DateTime.Now} at Commands] Something went wrong with executing a command. Text: {context.Message.Content} | Error: {result.ErrorReason}");
+                await Chatterbot.Mentioned(context);
             }
         }
     }
